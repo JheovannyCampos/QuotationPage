@@ -7,10 +7,12 @@ interface inputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
   placeholder: string;
+  select?: boolean;
+  options?: Array<string>;
 }
 
 const Input = (Props: inputProps) => {
-  const { name, label, placeholder, ...rest } = Props;
+  const { name, label, placeholder, select, options, ...rest } = Props;
   const inputRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
@@ -32,21 +34,42 @@ const Input = (Props: inputProps) => {
 
   return (
     <>
-      <label htmlFor={fieldName}>{label}</label>
-      <InputMask
-        className="input"
-        id={fieldName}
-        name={name}
-        mask="9.99"
-        ref={inputRef}
-        type="tel"
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        style={{ height: "40px", width: "100%" }}
-        required
-        {...rest}
-      />
-      {error && <span className="error">{error}</span>}
+      {select ? (
+        <>
+          <label htmlFor={fieldName} style={{ color: "white" }}>
+            {label}
+          </label>
+          <select>
+            {options &&
+              options.map((option, idx) => {
+                if (idx === 0) {
+                  return <option selected>Selectione</option>;
+                } else {
+                  return <option value={option}>{option}</option>;
+                }
+              })}
+          </select>
+          {error && <span className="error">{error}</span>}
+        </>
+      ) : (
+        <>
+          <label htmlFor={fieldName}>{label}</label>
+          <InputMask
+            className="input"
+            id={fieldName}
+            name={name}
+            mask="9.99"
+            ref={inputRef}
+            type="tel"
+            defaultValue={defaultValue}
+            placeholder={placeholder}
+            style={{ height: "40px", width: "100%" }}
+            required
+            {...rest}
+          />
+          {error && <span className="error">{error}</span>}
+        </>
+      )}
     </>
   );
 };

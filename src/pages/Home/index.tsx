@@ -3,14 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import { Form } from "@unform/web";
 import { Container, Content, FormContent, Header, Logo, Title } from "./styles";
 import Input from "../../components/Input";
+import { useField } from "@unform/core";
+import logo from "../../assets/logo.webp";
 
 interface Window {
   height: number;
   width: number;
+  color: string;
 }
 
 const Home = () => {
   const [window, setWindow] = useState<Array<Window>>([]);
+  const [color, setColor] = useState<string>("");
   const [showValue, setShowValue] = useState<boolean>(false);
   const formRef = useRef<any>();
 
@@ -25,6 +29,7 @@ const Home = () => {
     const newWindow = {
       height,
       width,
+      color: formRef.current.getFieldValue("color"),
     };
     console.log("newWindow", newWindow);
     setWindow([...window, newWindow]);
@@ -32,10 +37,12 @@ const Home = () => {
 
   console.log("window", window);
 
+  console.log("color", color);
+
   return (
     <Container>
       <Header>
-        <Logo src="/src/assets/logo.webp"></Logo>
+        <Logo src={logo}></Logo>
         <Title>Faça aqui, o seu orçamento de tela mosquiteira</Title>
       </Header>
       <Content>
@@ -68,8 +75,15 @@ const Home = () => {
             >
               <label style={{ color: "white" }}>Escolha a cor do perfil:</label>
 
-              <select name="color" id="color">
-                <option value="">Selecione</option>
+              <select
+                required
+                name="color"
+                id="color"
+                onChange={() =>
+                  setColor(formRef.current.getFieldValue("color"))
+                }
+              >
+                <option>Selecione</option>
                 <option value="aluminum">Aluminio</option>
                 <option value="white">Branco</option>
                 <option value="black">Preto</option>
@@ -113,6 +127,7 @@ const Home = () => {
                 <Card.Title>Janela {window.indexOf(item) + 1}</Card.Title>
                 <Card.Text>Altura: {item.height}</Card.Text>
                 <Card.Text>Largura: {item.width}</Card.Text>
+                <Card.Text>Cor: {item.color}</Card.Text>
               </Card.Body>
             </Card>
           ))}
