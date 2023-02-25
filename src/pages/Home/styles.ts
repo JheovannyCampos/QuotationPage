@@ -86,4 +86,12 @@ export const FormContent = styled.div`
       background: #04bf58;
     }
   }
+
+  #form-window {
+    @media screen and (max-width: 450px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 `;

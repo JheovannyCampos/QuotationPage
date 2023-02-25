@@ -111,6 +111,7 @@ const Home = () => {
       <Content>
         <FormContent>
           <Form
+            id="form-window"
             onSubmit={handleSubmit}
             style={{ display: "flex", alignItems: "center" }}
           >
