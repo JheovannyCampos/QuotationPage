@@ -39,8 +39,10 @@ const Input = (Props: inputProps) => {
         name={name}
         mask="9.99"
         ref={inputRef}
+        type="tel"
         defaultValue={defaultValue}
         placeholder={placeholder}
+        style={{ height: "40px", width: "100%" }}
         required
         {...rest}
       />

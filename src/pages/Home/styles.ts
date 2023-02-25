@@ -34,7 +34,6 @@ export const Content = styled.main`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 700px;
   margin: 0 auto;
 
   .cardWindow {
@@ -47,7 +46,6 @@ export const Content = styled.main`
 
 export const FormContent = styled.div`
   margin-top: 40px;
-  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: baseline;

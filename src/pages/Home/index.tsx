@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <Container>
       <Header>
-        <Logo src="/src/assets/cortnobre_logo.png"></Logo>
+        <Logo src="/src/assets/logo.webp"></Logo>
         <Title>Faça aqui, o seu orçamento de tela mosquiteira</Title>
       </Header>
       <Content>
@@ -46,19 +46,36 @@ const Home = () => {
             style={{ display: "flex", alignItems: "center" }}
           >
             <Input
-              name="height"
-              label=""
-              placeholder="Altura"
-              type="tel"
-              required
-            />
-            <Input
               name="width"
               label=""
               placeholder="Largura"
               type="tel"
               required
             />
+            <Input
+              name="height"
+              label=""
+              placeholder="Altura"
+              type="tel"
+              required
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "max-content",
+              }}
+            >
+              <label style={{ color: "white" }}>Escolha a cor do perfil:</label>
+
+              <select name="color" id="color">
+                <option value="">Selecione</option>
+                <option value="aluminum">Aluminio</option>
+                <option value="white">Branco</option>
+                <option value="black">Preto</option>
+                <option value="bronze">Bronze</option>
+              </select>
+            </div>
             <button className="button" type="submit">
               Adicionar Janela +
             </button>
