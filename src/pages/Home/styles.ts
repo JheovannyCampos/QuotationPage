@@ -5,10 +5,13 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: baseline;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   padding: 10px;
   background: #bc8946;
+
+  @media (max-width: 450px) {
+  }
 `;
 
 export const Logo = styled.img`

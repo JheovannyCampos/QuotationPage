@@ -34,42 +34,21 @@ const Input = (Props: inputProps) => {
 
   return (
     <>
-      {select ? (
-        <>
-          <label htmlFor={fieldName} style={{ color: "white" }}>
-            {label}
-          </label>
-          <select>
-            {options &&
-              options.map((option, idx) => {
-                if (idx === 0) {
-                  return <option selected>Selectione</option>;
-                } else {
-                  return <option value={option}>{option}</option>;
-                }
-              })}
-          </select>
-          {error && <span className="error">{error}</span>}
-        </>
-      ) : (
-        <>
-          <label htmlFor={fieldName}>{label}</label>
-          <InputMask
-            className="input"
-            id={fieldName}
-            name={name}
-            mask="9.99"
-            ref={inputRef}
-            type="tel"
-            defaultValue={defaultValue}
-            placeholder={placeholder}
-            style={{ height: "40px", width: "100%" }}
-            required
-            {...rest}
-          />
-          {error && <span className="error">{error}</span>}
-        </>
-      )}
+      <label htmlFor={fieldName}>{label}</label>
+      <InputMask
+        className="input"
+        id={fieldName}
+        name={name}
+        mask="9.99"
+        ref={inputRef}
+        type="tel"
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        style={{ height: "40px", width: "100%" }}
+        required
+        {...rest}
+      />
+      {error && <span className="error">{error}</span>}
     </>
   );
 };
