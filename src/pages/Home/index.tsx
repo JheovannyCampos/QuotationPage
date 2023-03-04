@@ -16,7 +16,7 @@ interface Window {
 const Home = () => {
   const [window, setWindow] = useState<Array<Window>>([]);
   const [color, setColor] = useState<string>("");
-  const [total, setTotal] = useState<number>(0);
+  const [total, setTotal] = useState<string>("");
   const [showValue, setShowValue] = useState<boolean>(false);
   const formRef = useRef<any>();
 
@@ -53,7 +53,7 @@ const Home = () => {
       }
     }, 0);
 
-    setTotal(total);
+    setTotal(total.toFixed(2));
 
     setShowValue(true);
   };
@@ -85,20 +85,24 @@ const Home = () => {
     setWindow([...window, newWindow]);
   };
 
-  const getText = () => {
-    let text =
-      `*Orçamento de tela mosquiteira*\n\n` +
-      window.reduce((acc, item, index) => {
-        const { height, width, color } = item;
-        return (
-          acc +
-          `*Janela ${
-            index + 1
-          }*\nAltura: ${height}\nLargura: ${width}\nCor: ${color}\n\n`
-        );
-      }, "");
+  const getText = (screens, total) => {
+    let text = `*Orçamento de tela mosquiteira*                                                                                                                                                                                       \n\n`;
 
-    text += `*Valor Total:* R$ ${total}`;
+    screens.forEach((screen, index) => {
+      const { height, width, color } = screen;
+      text += `\n                                                                                                                   
+                 *Janela ${
+                   index + 1
+                 }*                                                                                                                               
+                                           \n`;
+      text += `Altura: ${height}cm                                                                                                                                                                         \n`;
+      text += `Largura: ${width}cm                                                                                                                                                                          \n`;
+      text += `Cor: ${color}                                                                                                                                                                                
+                                           \n\n\n`; // quebra de linha adicional aqui
+    });
+
+    text += `Valor Total: R$ ${total}`;
+
     return text;
   };
 
@@ -180,6 +184,10 @@ const Home = () => {
               <Card.Body
                 key={idx}
                 onClick={() => {
+                  const resp = confirm("Deseja realmente remover essa janela?");
+
+                  if (!resp) return;
+
                   const newWindow = window.filter(
                     (item, index) => index !== idx
                   );
@@ -215,9 +223,11 @@ const Home = () => {
         }}
       >
         <a
-          href={`https://api.whatsapp.com/send?phone=5562981587561&text=${getText()}`}
+          href={`https://api.whatsapp.com/send?phone=5562983037304&text=${getText(
+            window,
+            total
+          )}`}
           target="_blank"
-          rel="noopener noreferrer"
         >
           <img
             src={whatsapp1}
