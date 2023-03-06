@@ -31,14 +31,15 @@ const Home = () => {
 
     const total = window.reduce((acc, item) => {
       const { height, width, color } = item;
-      const total = height * width;
-      if (total >= 1.1 * 1.1) {
+      const squareMeter = height * width;
+      const bigvalue = height >= width ? height : width;
+      if (bigvalue >= 1.1) {
         if (color === "Aluminio") {
-          return acc + 169.9;
+          return acc + 169.9 * squareMeter;
         } else {
-          return acc + 186.3;
+          return acc + 186.3 * squareMeter;
         }
-      } else if (total >= 0.8 * 0.8) {
+      } else if (bigvalue >= 0.8) {
         if (color === "Aluminio") {
           return acc + 106.3;
         } else {
@@ -85,10 +86,10 @@ const Home = () => {
     setWindow([...window, newWindow]);
   };
 
-  const getText = (screens, total) => {
+  const getText = (screens: any, total: any) => {
     let text = `*Orçamento de tela mosquiteira*                                                                                                                                                                                       \n\n`;
 
-    screens.forEach((screen, index) => {
+    screens.forEach((screen: any, index: any) => {
       const { height, width, color } = screen;
       text += `\n                                                                                                                   
                  *Janela ${
